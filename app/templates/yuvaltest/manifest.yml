@@ -1,0 +1,7 @@
+---
+applications:
+ - name: yuvaltest
+   random-route: true
+   path: target/yuvaltest.war
+   memory: 512M
+   instances: 1
