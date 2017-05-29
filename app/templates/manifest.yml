@@ -1,0 +1,10 @@
+applications:
+- name: <%= server.name %> 
+  host: <%= server.host %>
+  buildpack: liberty-for-java
+  instances: 1
+  memory: 512
+  disk_quota: 1024M
+  timeout: 180
+  services:
+  - <%= server.services[0] %>
