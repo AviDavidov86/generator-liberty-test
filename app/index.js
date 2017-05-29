@@ -33,6 +33,7 @@ module.exports = class extends Generator {
 		if (projectConfig.hasServer) {
 			projectConfig.server.organization = projectConfig.server.organization || "antonal";
 		}
+		this._generateSampleFiles(platform, projectConfig);
 	}
 	_sanitizeOption(options, name) {
 		if (!options[name]) {
@@ -46,6 +47,20 @@ module.exports = class extends Generator {
 				throw "--" + name + " parameter is expected to be a valid stringified JSON object";
 			}
 		}
+	}
+	_generateSampleFiles(platform, projectConfig) {
+		console.log("_generateKubeFiles :: platform ::", platform);
+		console.log("_generateKubeFiles :: projectConfig ::", JSON.stringify(projectConfig));
+		if (!projectConfig.hasServer) {
+			console.warn("No server configuration received. Skipping.");
+			return;
+		}
+
+		this.fs.copyTpl(
+			this.templatePath("*"),
+			this.destinationPath("."),
+			projectConfig
+		);
 	}
 	method() {}
 };
