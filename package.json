@@ -1,0 +1,15 @@
+{
+  "name": "generator-liberty-test",
+  "version": "0.0.1",
+  "description": "Liberty test",
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "js-yaml": "^3.8.4",
+    "yeoman-generator": "^1.1.0"
+  }
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="new server">
+    <!-- Enable features -->
+    <featureManager>
+        <feature>ssl-1.0</feature>
+        <feature>servlet-3.1</feature>
+        <feature>appSecurity-2.0</feature>
+        <feature>openidConnectClient-1.0</feature>
+    </featureManager>
+    <!--
+    <authFilter id="myAuthFilter">
+      <requestUrl id="myRequestUrl" urlPattern="/ProtectedServlet" matchType="contains"/>
+    </authFilter>
+    -->
+    <openidConnectClient id="YuvalRP"
+                         clientId= "${cloud.services.<%= server.services[0] %>.connection.clientId}"
+                         clientSecret= "${cloud.services.<%= server.services[0] %>.clientSecret}"
+                         authorizationEndpointUrl="${cloud.services.<%= server.services[0] %>.connection.oauthServerUrl}/authorization"
+                         tokenEndpointUrl="${cloud.services.<%= server.services[0] %>.connection.oauthServerUrl}/token"
+                         jwkEndpointUrl="https://appid-oauth.eu-gb.bluemix.net/oauth/v3/publickeys"
+                         issuerIdentifier="${cloud.services.<%= server.services[0] %>.connection.profilesUrl}"
+                         tokenEndpointAuthMethod="basic"
+                         signatureAlgorithm="RS256"
+                         authFilterid="myAuthFilter"
+                         trustAliasName="eu-gb.bluemix.net"
+                         trustStoreRef="appidtruststore"
+    />
+    <authFilter id="myAuthFilter">
+        <requestUrl id="myRequestUrl" urlPattern="/ProtectedServlet" matchType="contains"/>
+    </authFilter>
+    <keyStore id="defaultKeyStore" password="fishfishfish"/>
+    <keyStore id="appidtruststore" password="Liberty" location="${server.config.dir}/stage1trust.jks"/>
+    <ssl id="defaultSSLConfig" keyStoreRef="defaultKeyStore" trustStoreRef="appidtruststore"/>
+    <application type="war" id="ProtectedServlet" context-root="/appidSample" location="${server.config.dir}/apps/yuvaltest.war" />
+    <applicationManager autoExpand="true"/>
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint id="defaultHttpEndpoint"
+                  httpPort="9080"
+                  host="*"
+                  httpsPort="9443" />
+    <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true"/>
+</server>
