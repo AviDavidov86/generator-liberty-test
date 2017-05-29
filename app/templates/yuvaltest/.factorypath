@@ -1,0 +1,14 @@
+<factorypath>
+    <factorypathentry kind="PLUGIN" id="com.ibm.jee.annotations.processor" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="PLUGIN" id="com.ibm.etools.javaee.cdi.ext.ui" enabled="false" runInBatchMode="false"/>
+</factorypath>
+
+
+
+LibertyForAppIdwoLiberty-do_not_delete
+
+cf set-env LibertyForAppIdwoLiberty-do_not_delete IBM_LIBERTY_BETA true
+
+ cf set-env LibertyForAppIdwoLiberty-do_not_delete JBP_CONFIG_LIBERTY "version: +"
+
+cf push LibertyForAppIdwoLiberty-do_not_delete -b https://github.com/cloudfoundry/ibm-websphere-liberty-buildpack 
